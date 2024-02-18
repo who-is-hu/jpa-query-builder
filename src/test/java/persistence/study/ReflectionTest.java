@@ -69,13 +69,9 @@ public class ReflectionTest {
         final int price = 10_000;
         Car car = carClass.getDeclaredConstructor().newInstance();
 
-        Field nameField = carClass.getDeclaredField("name");
-        nameField.setAccessible(true);
-        nameField.set(car, name);
-
-        Field priceField = carClass.getDeclaredField("price");
-        priceField.setAccessible(true);
-        priceField.set(car, price);
+        setFiledValue(car, "name", name);
+        setFiledValue(car, "price", price);
+        
 
         assertThat(car.getName()).isEqualTo(name);
         assertThat(car.getPrice()).isEqualTo(price);
@@ -91,6 +87,12 @@ public class ReflectionTest {
         assertThat(car).isNotNull();
         assertThat(car.getName()).isEqualTo(name);
         assertThat(car.getPrice()).isEqualTo(price);
+    }
+
+    private void setFiledValue(Object targetObject, String fieldName, Object value) throws Exception {
+        Field field = carClass.getDeclaredField(fieldName);
+        field.setAccessible(true);
+        field.set(targetObject, value);
     }
 }
 
