@@ -27,7 +27,7 @@ public class ReflectionTest {
 
     @Test
     @DisplayName("car 객체의 이름이 test 로 시작하는 메서드만 실행하기")
-    void testMethodRun() throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
+    void testMethodRun() throws Exception {
         Car car = carClass.getDeclaredConstructor(String.class, int.class).newInstance("test", 123);
         final String targetMethodNamePrefix = "test";
 
@@ -45,7 +45,7 @@ public class ReflectionTest {
 
     @Test
     @DisplayName("car 객체의 @PrintView 어노테이션이 붙은 메서드만 실행하기")
-    public void testAnnotationMethodRun() throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
+    public void testAnnotationMethodRun() throws Exception {
         Car car = carClass.getDeclaredConstructor().newInstance();
 
         Arrays.stream(carClass.getDeclaredMethods())
@@ -64,7 +64,7 @@ public class ReflectionTest {
 
     @Test
     @DisplayName("car 객체의 private 필드에 접근하기")
-    public void privateFieldAccess() throws NoSuchFieldException, IllegalAccessException, NoSuchMethodException, InvocationTargetException, InstantiationException {
+    public void privateFieldAccess() throws Exception {
         final String name = "testCar";
         final int price = 10_000;
         Car car = carClass.getDeclaredConstructor().newInstance();
@@ -83,7 +83,7 @@ public class ReflectionTest {
 
     @Test
     @DisplayName("인자를 가진 생성자의 인스턴스 생성")
-    void constructorWithArgs() throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
+    void constructorWithArgs() throws Exception {
         final String name = "testCar";
         final int price = 10_000;
         Car car = carClass.getDeclaredConstructor(String.class, int.class).newInstance(name, price);
